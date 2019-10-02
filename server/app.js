@@ -11,7 +11,7 @@ app.use(cors());
 
 const port = process.env.PORT || 3000;
 
-app.use("/api/genres", genres);
+app.use("/api", genres);
 app.use("/api/customers", customers);
 
 app.listen(port, () => {
