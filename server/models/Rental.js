@@ -4,7 +4,7 @@ const Rental = mongoose.model(
     "Rental",
     mongoose.Schema({
         customer: {
-            type: new mongoose.Schema({
+            type: mongoose.Schema({
                 name: {
                     type: String,
                     required: true,
@@ -34,8 +34,10 @@ const Rental = mongoose.model(
                     maxLenght: 255
                 },
                 genre: {
-                    type: genreScheme,
-                    required: true
+                    type: String,
+                    required: true,
+                    minLength: 5,
+                    maxLength: 50
                 },
                 numberInStock: {
                     type: Number,
