@@ -48,7 +48,7 @@ router.post("/login", async (req, res) => {
         if (!passwordMatch) {
             throw new Error({ error: "Passwords dont match" });
         }
-        const token = jwt.sign({ _id: user._id }, "testKey");
+        const token = jwt.sign({ _id: user._id }, process.env.SECRET_KEY);
         res.send({ user, token });
     } catch (error) {
         res.status(400).send(`Login error: ${error}`);
