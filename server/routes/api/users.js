@@ -1,7 +1,16 @@
 const router = require("express").Router();
 const User = require("../../models/User");
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+const auth = require("../../middleware/auth");
+
+router.get("/me", auth, async (req, res) => {
+    try {
+        const user = await User.findOne({ _id: req.user._id });
+        res.send(user);
+    } catch (error) {
+        res.status(400).send(`Couldnt get current user: ${error}`);
+    }
+});
 
 router.get("/users", async (req, res) => {
     try {
@@ -48,8 +57,8 @@ router.post("/login", async (req, res) => {
         if (!passwordMatch) {
             throw new Error({ error: "Passwords dont match" });
         }
-        const token = jwt.sign({ _id: user._id }, process.env.SECRET_KEY);
-        res.send({ user, token });
+        const token = user.generateToken();
+        res.header("Authorization", token).send(user);
     } catch (error) {
         res.status(400).send(`Login error: ${error}`);
     }

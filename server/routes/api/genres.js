@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const GenreType = require("../../models/Genre");
+const auth = require("../../middleware/auth");
+const admin = require("../../middleware/admin");
 
 router.get("/genres", async (req, res) => {
     try {
@@ -10,7 +12,7 @@ router.get("/genres", async (req, res) => {
     }
 });
 
-router.post("/genres", (req, res) => {
+router.post("/genres", auth, (req, res) => {
     const addGenre = new GenreType({
         genre: req.body.genre
     });
@@ -24,7 +26,7 @@ router.post("/genres", (req, res) => {
         });
 });
 
-router.put("/genres/:id", async (req, res) => {
+router.put("/genres/:id", auth, async (req, res) => {
     try {
         const genres = await GenreType.findByIdAndUpdate(req.params.id, {
             name: req.body.name
@@ -35,7 +37,7 @@ router.put("/genres/:id", async (req, res) => {
     }
 });
 
-router.delete("/genres/:id", async (req, res) => {
+router.delete("/genres/:id", [auth, admin], async (req, res) => {
     try {
         const genres = await GenreType.findByIdAndRemove(req.params.id);
         res.send(genres);
