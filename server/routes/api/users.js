@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const User = require("../../models/User");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 router.get("/users", async (req, res) => {
     try {
@@ -11,14 +12,14 @@ router.get("/users", async (req, res) => {
     }
 });
 
-router.post("/user", async (req, res) => {
-    let user = await User.findOne({email: req.body.email})
-    if(user){
-        return res.status(400).send('this user already exist')
+router.post("/register", async (req, res) => {
+    let user = await User.findOne({ email: req.body.email });
+    if (user) {
+        return res.status(400).send("this user already exist");
     }
     bcrypt.hash(req.body.password, 10, (err, hash) => {
-        if(err){
-            return res.send(err)
+        if (err) {
+            return res.send(err);
         }
         let newUser = new User({
             name: req.body.name,
@@ -34,6 +35,24 @@ router.post("/user", async (req, res) => {
                 res.send(err);
             });
     });
+});
+
+router.post("/login", async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const user = await User.findOne({ email });
+        if (!user) {
+            throw new Error({ error: "No user found" });
+        }
+        const passwordMatch = await bcrypt.compare(password, user.password);
+        if (!passwordMatch) {
+            throw new Error({ error: "Passwords dont match" });
+        }
+        const token = jwt.sign({ _id: user._id }, "testKey");
+        res.send({ user, token });
+    } catch (error) {
+        res.status(400).send(`Login error: ${error}`);
+    }
 });
 
 module.exports = router;
