@@ -1,7 +1,7 @@
 const mongoose = require("../db");
 
 let genreScheme = mongoose.Schema({
-    genre: {
+    name: {
         type: String,
         required: true,
         minLength: 5,
@@ -11,5 +11,6 @@ let genreScheme = mongoose.Schema({
 
 let Genre = mongoose.model("Genre", genreScheme);
 
-module.exports = genreScheme;
+//module.exports = genreScheme;
+exports.genreScheme = genreScheme;
 module.exports = Genre;

@@ -25,7 +25,7 @@ const Rental = mongoose.model(
             required: true
         },
         movie: {
-            type: new mongoose.Schema({
+            type: mongoose.Schema({
                 title: {
                     type: String,
                     required: true,

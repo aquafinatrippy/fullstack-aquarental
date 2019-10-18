@@ -5,6 +5,8 @@ const cors = require("cors");
 const customers = require("./routes/api/customers");
 const movies = require("./routes/api/movies");
 const rentals = require("./routes/api/rentals");
+const users = require("./routes/api/users");
+
 
 const app = express();
 app.use(bodyParser.json());
@@ -17,6 +19,7 @@ app.use("/api", genres);
 app.use("/api", customers);
 app.use("/api", movies);
 app.use("/api", rentals);
+app.use("/api", users);
 
 app.listen(port, () => {
     console.log(`server running on port ${port}`);
