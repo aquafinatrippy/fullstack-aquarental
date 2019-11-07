@@ -3,7 +3,7 @@
     <v-app-bar app>
       <v-toolbar-title class="headline text-uppercase">
         <span>AquaRental</span>
-        <span class="font-weight-light">Movie rent</span>
+        <span class="font-weight-light caption">Movie rent</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn text href="https://github.com/vuetifyjs/vuetify/releases/latest" target="_blank">

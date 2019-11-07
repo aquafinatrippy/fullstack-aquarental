@@ -2,12 +2,12 @@
   <v-container>
     <v-row align="center" justify="center">
       <v-col cols="12" sm="8" md="4">
-        <v-card color="rgb(127, 128, 124)">
+        <v-card>
           <v-form>
             <p class="text-center">Login</p>
-            <v-text-field></v-text-field>
-            <v-text-field></v-text-field>
-            <v-btn depressed small color="primary" align="center">Login</v-btn>
+            <v-text-field label="E-mail" dense rounded filled></v-text-field>
+            <v-text-field label="Password" dense rounded filled :type="'password'"></v-text-field>
+            <v-btn depressed medium color="primary" align="center">Login</v-btn>
           </v-form>
         </v-card>
       </v-col>
