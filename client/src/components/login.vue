@@ -20,3 +20,10 @@ export default {
   name: "login"
 };
 </script>
+
+
+<style lang="scss" scoped>
+.v-btn {
+  margin-bottom: 20px;
+}
+</style>

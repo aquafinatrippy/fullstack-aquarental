@@ -7,7 +7,7 @@
             <p class="text-center">Register</p>
             <v-text-field label="e-mail" dense rounded filled></v-text-field>
             <v-text-field label="password" dense rounded filled :type="'password'"></v-text-field>
-            <v-btn depressed small color="primary" align="center">Login</v-btn>
+            <v-btn depressed medium color="primary" align="center">Login</v-btn>
           </v-form>
         </v-card>
       </v-col>
@@ -20,3 +20,9 @@ export default {
   name: "register"
 };
 </script>
+
+<style lang="scss" scoped>
+.v-btn {
+  margin-bottom: 20px;
+}
+</style>
